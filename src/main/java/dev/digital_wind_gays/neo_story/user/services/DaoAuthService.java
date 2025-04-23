@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
@@ -30,6 +31,9 @@ public class DaoAuthService implements AuthService {
 
     @Autowired
     private DaoRegisterDtoValidator registerDtoValidator;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UuidService uuidService;
@@ -59,7 +63,7 @@ public class DaoAuthService implements AuthService {
                 .id(uuidService.generate())
                 .username(registerDto.getUsername())
                 .email(registerDto.getEmail())
-                .password(registerDto.getPassword())
+                .password(passwordEncoder.encode(registerDto.getPassword()))
                 .build();
 
         user = userRepository.save(user);

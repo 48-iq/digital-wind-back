@@ -9,8 +9,6 @@ public class NeoStoryApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(NeoStoryApplication.class, args);
-		SecurityConfig securityConfig = new SecurityConfig();
-		securityConfig.getUtil();
 	}
 
 }
