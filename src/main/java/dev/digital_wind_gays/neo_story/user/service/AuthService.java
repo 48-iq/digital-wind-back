@@ -1,4 +1,4 @@
-package dev.digital_wind_gays.neo_story.user.services;
+package dev.digital_wind_gays.neo_story.user.service;
 
 import dev.digital_wind_gays.neo_story.user.dto.JwtDto;
 import dev.digital_wind_gays.neo_story.user.dto.LoginDto;

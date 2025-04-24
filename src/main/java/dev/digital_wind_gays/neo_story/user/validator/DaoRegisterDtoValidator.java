@@ -1,4 +1,4 @@
-package dev.digital_wind_gays.neo_story.user.validators;
+package dev.digital_wind_gays.neo_story.user.validator;
 
 import dev.digital_wind_gays.neo_story.user.dto.RegisterDto;
 import dev.digital_wind_gays.neo_story.user.repository.UserRepository;

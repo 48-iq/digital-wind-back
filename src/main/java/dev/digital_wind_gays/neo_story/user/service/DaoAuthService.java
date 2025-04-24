@@ -1,14 +1,14 @@
-package dev.digital_wind_gays.neo_story.user.services;
+package dev.digital_wind_gays.neo_story.user.service;
 
 import dev.digital_wind_gays.neo_story.core.services.UuidService;
 import dev.digital_wind_gays.neo_story.user.dto.JwtDto;
 import dev.digital_wind_gays.neo_story.user.dto.LoginDto;
 import dev.digital_wind_gays.neo_story.user.dto.RegisterDto;
 import dev.digital_wind_gays.neo_story.user.entity.User;
-import dev.digital_wind_gays.neo_story.user.exceptions.UserAlreadyExistsException;
+import dev.digital_wind_gays.neo_story.user.exception.UserAlreadyExistsException;
 import dev.digital_wind_gays.neo_story.user.repository.UserRepository;
 import dev.digital_wind_gays.neo_story.user.security.DaoUserDetails;
-import dev.digital_wind_gays.neo_story.user.validators.DaoRegisterDtoValidator;
+import dev.digital_wind_gays.neo_story.user.validator.DaoRegisterDtoValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

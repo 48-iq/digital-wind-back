@@ -1,4 +1,4 @@
-package dev.digital_wind_gays.neo_story.user.exceptions;
+package dev.digital_wind_gays.neo_story.user.exception;
 
 import lombok.experimental.StandardException;
 
