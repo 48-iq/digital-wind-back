@@ -42,18 +42,13 @@ public class JwtFilter extends OncePerRequestFilter {
 
                 DecodedJWT decodedJWT = jwtService.verify(token);
                 String userId = decodedJWT.getClaim("userId").asString();
-                LocalDateTime issuedAt = decodedJWT.getIssuedAt().toInstant()
-                        .atZone(ZoneId.systemDefault()).toLocalDateTime();
 
                 User user = userRepository.findById(userId).orElseThrow(
                         () -> new UserNotFoundException("User with id " + userId + " not found")
                 );
 
-                UserDetails userDetails = new DaoUserDetails(user);
-                Authentication authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, null, userDetails.getAuthorities()
-                );
-                authentication.setAuthenticated(true);
+                UserDetails userDetails = new EntityUserDetails(user);
+                Authentication authentication = UsernamePasswordAuthenticationToken.authenticated(userDetails, null, userDetails.getAuthorities());
                 if (SecurityContextHolder.getContext().getAuthentication() == null ||
                         !SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
                     SecurityContextHolder.getContext().setAuthentication(authentication);

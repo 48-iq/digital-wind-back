@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class DaoUserDetails implements UserDetails {
+public class EntityUserDetails implements UserDetails {
     private User user;
 
     @Override

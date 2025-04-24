@@ -7,8 +7,9 @@ import dev.digital_wind_gays.neo_story.user.dto.RegisterDto;
 import dev.digital_wind_gays.neo_story.user.entity.User;
 import dev.digital_wind_gays.neo_story.user.exception.UserAlreadyExistsException;
 import dev.digital_wind_gays.neo_story.user.repository.UserRepository;
-import dev.digital_wind_gays.neo_story.user.security.DaoUserDetails;
+import dev.digital_wind_gays.neo_story.user.security.EntityUserDetails;
 import dev.digital_wind_gays.neo_story.user.validator.DaoRegisterDtoValidator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -17,7 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 
+@Validated
 @Service
 public class DaoAuthService implements AuthService {
     @Autowired
@@ -39,19 +42,19 @@ public class DaoAuthService implements AuthService {
     private UuidService uuidService;
 
     @Override
-    public JwtDto login(LoginDto loginDto) {
+    public JwtDto login(@Valid LoginDto loginDto) {
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 loginDto.getUsername(),
                 loginDto.getPassword()
         );
 
         authentication = authenticationManager.authenticate(authentication);
-        DaoUserDetails userDetails = (DaoUserDetails) authentication.getPrincipal();
+        EntityUserDetails userDetails = (EntityUserDetails) authentication.getPrincipal();
         return new JwtDto(jwtService.generate(userDetails.getUser()));
     }
 
     @Override
-    public JwtDto register(RegisterDto registerDto) {
+    public JwtDto register(@Valid RegisterDto registerDto) {
         BindingResult errors = new BeanPropertyBindingResult(registerDto, "registerDto");
         registerDtoValidator.validate(registerDto, errors);
 

@@ -31,6 +31,7 @@ public class DefaultJwtService implements JwtService {
         return JWT.create()
                 .withIssuer(issuer)
                 .withSubject(subject)
+                .withIssuedAt(ZonedDateTime.now().toInstant())
                 .withExpiresAt(ZonedDateTime.now().plusDays(duration).toInstant())
                 .withClaim("userId", user.getId())
                 .sign(Algorithm.HMAC256(secret));
