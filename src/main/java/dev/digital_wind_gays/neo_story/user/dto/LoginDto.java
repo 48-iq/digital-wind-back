@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @Builder
 public class LoginDto {
     @NotNull
-    @Pattern(regexp = "^\\w{3,32}$")
+    @Pattern(regexp = "^.{3,64}$")
     private String username;
     @NotNull
-    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z_])(?=.*[A-Z])(?=.*[@#$%^&+=!*:?()\\[\\]])(?=\\S+$).{8,}$")
+    @Pattern(regexp = "^.{3,64}$")
     private String password;
 }
